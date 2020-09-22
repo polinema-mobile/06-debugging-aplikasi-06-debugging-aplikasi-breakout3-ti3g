@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         button_kurang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getAngkaMasukan();
-                text_hasil.setText(angka_pertama+angka_kedua);
+                getAngkaMasukan(view);
+                text_hasil.setText(""+(angka_pertama-angka_kedua));
 
             }
         });
@@ -47,15 +47,15 @@ public class MainActivity extends AppCompatActivity {
         button_tambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getAngkaMasukan();
-                text_hasil.setText(angka_pertama+angka_kedua);
+                getAngkaMasukan(view);
+                text_hasil.setText(""+(angka_kedua+angka_pertama));
             }
         });
     }
 
     public void getAngkaMasukan(View view){
         //TODO 01 Buatlah kode program untuk mengambil nilai input dari edit text
-        angka_pertama = R.id.edit_text_angka_pertama;
-        angka_kedua = R.id.edit_text_angka_kedua;
+        angka_pertama = Integer.parseInt(String.valueOf(edit_text_angka_pertama.getText()));
+        angka_kedua = Integer.parseInt(String.valueOf(edit_text_angka_kedua.getText()));
     }
 }
