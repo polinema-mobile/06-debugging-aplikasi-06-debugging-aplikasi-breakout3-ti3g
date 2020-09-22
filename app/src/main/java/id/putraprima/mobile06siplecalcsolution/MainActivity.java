@@ -3,6 +3,7 @@ package id.putraprima.mobile06siplecalcsolution;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,25 @@ public class MainActivity extends AppCompatActivity {
         edit_text_angka_pertama = findViewById(R.id.edit_text_angka_pertama);
 
         //TODO 02 Buatlah kode program untuk menambahkan event klik dari tombol kali dan tombol bagi
+        button_bagi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getAngkaMasukan(view);
+                if (!TextUtils.isEmpty(edit_text_angka_pertama.getText()) ||
+                        !TextUtils.isEmpty(edit_text_angka_kedua.getText()))
+                    text_hasil.setText(""+(angka_pertama/angka_kedua));
+            }
+        });
+
+        button_kali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getAngkaMasukan(view);
+                if (!TextUtils.isEmpty(edit_text_angka_pertama.getText()) ||
+                        !TextUtils.isEmpty(edit_text_angka_kedua.getText()))
+                    text_hasil.setText(""+(angka_pertama*angka_kedua));
+            }
+        });
 
         //TODO 03 Gunakanlah Log Cat Untuk memperbaiki kesalahan program
 
@@ -39,8 +59,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getAngkaMasukan(view);
-                text_hasil.setText(""+(angka_pertama-angka_kedua));
-
+                if (!TextUtils.isEmpty(edit_text_angka_pertama.getText()) ||
+                        !TextUtils.isEmpty(edit_text_angka_kedua.getText()))
+                    text_hasil.setText(""+(angka_pertama-angka_kedua));
             }
         });
 
@@ -48,14 +69,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getAngkaMasukan(view);
-                text_hasil.setText(""+(angka_kedua+angka_pertama));
+                if (!TextUtils.isEmpty(edit_text_angka_pertama.getText()) ||
+                        !TextUtils.isEmpty(edit_text_angka_kedua.getText()))
+                   text_hasil.setText(""+(angka_kedua+angka_pertama));
             }
         });
     }
 
     public void getAngkaMasukan(View view){
         //TODO 01 Buatlah kode program untuk mengambil nilai input dari edit text
-        angka_pertama = Integer.parseInt(String.valueOf(edit_text_angka_pertama.getText()));
-        angka_kedua = Integer.parseInt(String.valueOf(edit_text_angka_kedua.getText()));
+        if (TextUtils.isEmpty(edit_text_angka_pertama.getText()) ||
+                TextUtils.isEmpty(edit_text_angka_kedua.getText())){
+            edit_text_angka_pertama.setError("Enter value");
+            edit_text_angka_kedua.setError("Enter value");
+            edit_text_angka_kedua.requestFocus();
+            edit_text_angka_pertama.requestFocus();
+        }
+        else{
+            angka_pertama = Integer.parseInt(String.valueOf(edit_text_angka_pertama.getText()));
+            angka_kedua = Integer.parseInt(String.valueOf(edit_text_angka_kedua.getText()));
+            System.out.println(angka_kedua+" "+angka_pertama);
+        }
     }
 }
