@@ -16,6 +16,30 @@ public class MainActivity extends AppCompatActivity {
 
     private int angka_pertama, angka_kedua;
 
+    public int getAngka_kedua() {
+        return angka_kedua;
+    }
+
+    public int getAngka_pertama() {
+        return angka_pertama;
+    }
+
+    public void setAngka_kedua(int angka_kedua) {
+        this.angka_kedua = angka_kedua;
+    }
+
+    public void setAngka_pertama(int angka_pertama) {
+        this.angka_pertama = angka_pertama;
+    }
+
+    public void setButton_bagi(Button button_bagi) {
+        this.button_bagi = button_bagi;
+    }
+
+    public Button getButton_bagi() {
+        return button_bagi;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 getAngkaMasukan(view);
                 if (!TextUtils.isEmpty(edit_text_angka_pertama.getText()) ||
                         !TextUtils.isEmpty(edit_text_angka_kedua.getText()))
-                    text_hasil.setText(""+(angka_pertama/angka_kedua));
+                    if (Integer.parseInt(String.valueOf(edit_text_angka_kedua.getText()))>0) {
+                        text_hasil.setText(""+(angka_pertama/angka_kedua));
+                    }else text_hasil.setText("do not divide value with 0");
             }
         });
 
